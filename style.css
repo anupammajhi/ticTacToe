@@ -1,0 +1,60 @@
+body{
+  background-color: #333;
+  color:#eee;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.heading{
+  font-size: 2.5em;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.container{
+  width:360px;
+  margin:50px auto;
+  background-color: #666;
+  border-radius: 20px;
+}
+
+
+.tictactoe{
+  font-size: 0;
+  text-align: center;
+  padding: 30px 0;
+}
+
+.rw1,
+.row2,
+.row3{
+
+}
+
+.col1,
+.col2,
+.col3{
+  display:inline-block;
+  height:100px;
+  width:100px;
+  line-height: 100px;
+  vertical-align: middle;
+  text-align: center;
+  background-color: transparent;
+  clear: both;
+  font-size: 60px;
+  border-width: 0;
+  border-color: white;
+  border-style: solid;
+}
+
+.col2{
+  border-right-width: 1px;
+  border-left-width: 1px;
+}
+
+.row2 .col1,
+.row2 .col2,
+.row2 .col3{
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
