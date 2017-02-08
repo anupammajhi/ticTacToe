@@ -1,9 +1,12 @@
 $(function() {})
 
+function singleOrDouble(){
+
+}
 
 // Create array of size 9 with blanks
 arr = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-playerChoice = prompt("Enter choice")
+
 playerChoice == "O" ? choice = "X" : choice = "O"
 //Display X or O in the tic tac toe squares
 function display() {
