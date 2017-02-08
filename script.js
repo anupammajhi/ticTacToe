@@ -29,8 +29,9 @@ $(".col1, .col2, .col3").click(function() {
 possibleMovesAI = []
 possibleMovesPlayer = []
 possibleMovesWins = []
+possibleMovesDraw = []
 MovesLeft = true;
-status = []
+statusArr = []
 
 //WinArr possible Win Cases
 winArr = [
@@ -101,7 +102,11 @@ function calculatePossibleMoves() {
                 } else if (status == "LIVE") {
                     possibleMovesAI.push([moveArray[0].concat([ele]), moveArray[1], status])
                     // console.log(moveArray[0].concat([ele]), moveArray[1], status);
+                }else if (status == "DRAW") {
+                    possibleMovesDraw.push([moveArray[0].concat([ele]), moveArray[1], status])
                 }
+
+                statusArr.push(status)
 
             })
         });
@@ -147,7 +152,10 @@ function calculatePossibleMoves() {
                     // console.log(moveArray[0], moveArray[1].concat([ele]), status)
                     possibleMovesPlayer.push([moveArray[0], moveArray[1].concat([ele]), status])
                 }
-
+                else if (status == "DRAW") {
+                    possibleMovesDraw.push([moveArray[0], moveArray[1].concat([ele]), status])
+                }
+                statusArr.push(status)
             })
         });
 
