@@ -45,6 +45,9 @@ body{
   border-width: 0;
   border-color: white;
   border-style: solid;
+  /*Redundant cursors*/
+  cursor: default;
+  cursor: pointer;
 }
 
 .col2{
