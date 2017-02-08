@@ -1,7 +1,7 @@
 body{
   background-color: #333;
   color:#eee;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Love Ya Like A Sister', sans-serif;
 }
 
 .heading{
@@ -17,11 +17,19 @@ body{
   border-radius: 20px;
 }
 
-
 .tictactoe{
   font-size: 0;
   text-align: center;
   padding: 30px 0;
+  display: none;
+}
+
+.chance{
+  text-align: center;
+  font-size: 1.5em;
+  padding: 15px;
+  margin: 15px;
+  font-size: 30px;
 }
 
 .rw1,
@@ -60,4 +68,43 @@ body{
 .row2 .col3{
   border-top-width: 1px;
   border-bottom-width: 1px;
+}
+
+.chooseWeapon,
+.gamePlay{
+  text-align: center;
+  padding: 30px 0;
+  display: none;
+}
+
+.weaponText,
+.gameplayText{
+  font-size: 1.3em;
+  margin: 10px;
+  padding: 10px;
+}
+
+.singleplayer,
+.doubleplayer,
+.weaponX,
+.weaponO{
+  display: inline-block;
+  margin: 15px;
+  padding: 15px;
+  background-color: #333;
+  border-radius: 30px;
+  font-size: 1.5em;
+  border : solid 1px transparent;
+}
+
+.singleplayer:hover,
+.doubleplayer:hover,
+.weaponX:hover,
+.weaponO:hover{
+  background-color: #006400;
+  transition-duration: 0.5s;
+  border: solid 1px #999;
+  /*Redundant cursors*/
+  cursor: default;
+  cursor: pointer;
 }

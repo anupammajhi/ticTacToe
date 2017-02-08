@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister" rel="stylesheet"> 
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Tic Tac Toe!</title>
 </head>
@@ -14,6 +14,7 @@
     <div class="heading">Tic Tac Toe!</div>
     <div class="container">
         <div class="tictactoe">
+            <div class="chance"></div>
             <div class="row1">
                 <div class="col1 box" id="box0"></div>
                 <div class="col2 box" id="box1"></div>
@@ -31,10 +32,18 @@
             </div>
         </div>
         <div class="gamePlay">
-            <div class="gameplayText">How Do You Want To Play</div>
+            <div class="gameplayText">How Do You Want To Play?</div>
+            <div class="gameplayChoice">
+              <div class="singleplayer">1 Player</div>
+              <div class="doubleplayer">2 Player</div>
+            </div>
         </div>
         <div class="chooseWeapon">
-            <div class="weaponTeaxt">Choose your Weapon</div>
+            <div class="weaponText">Choose your Weapon <span></span></div>
+            <div class="weaponChoice">
+              <div class="weaponO">O</div>
+              <div class="weaponX">X</div>
+            </div>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

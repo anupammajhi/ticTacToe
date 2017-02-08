@@ -1,8 +1,48 @@
-$(function() {})
+$(function(){
+  $(".gamePlay").css("transition-duration","1s");
+  $(".chooseWeapon").css("transition-duration","1s");
+  $(".tictactoe").css("transition-duration","1s");
 
-function singleOrDouble(){
+  $(".gamePlay").css("display","block");
+});
+
+var gameplay = "";
+var playerChoice = "";
+chance = Math.round((Math.random()));
+
+function displayChance(){
+  if(gameplay == "2 Player" && chance == 0){
+    text = "Player 1's Chance"
+  }
+  if(gameplay == "2 Player" && chance == 1){
+    text = "Player 2's Chance"
+  }
+  if(gameplay == "1 Player" && chance == 0){
+    text = "Computer's Chance"
+  }
+  if(gameplay == "1 Player" && chance == 1){
+    text = "Your Chance"
+  }
+  $(".chance").text(text);
 
 }
+
+
+$(".singleplayer, .doubleplayer").click(function(){
+  gameplay = $(this).text();
+  $(".gamePlay").css("display","none");
+  $(".chooseWeapon").css("display","block");
+  if(gameplay == "2 Player"){
+    $(".weaponText span").text("Player 1")
+  }
+})
+
+$(".weaponX, .weaponO").click(function(){
+  playerChoice = $(this).text();
+  $(".chooseWeapon").css("display","none");
+  $(".tictactoe").css("display","block");
+  displayChance()
+})
 
 // Create array of size 9 with blanks
 arr = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
