@@ -134,6 +134,8 @@ function calculatePossibleMoves() {
 
             emptyBoxes.forEach(function(ele) {
 
+              if(ele == 0){console.error(emptyBoxes)}
+
                 if (checkWin(moveArray[0].concat([ele]))) {
                     status = "WON"
                 } else if (((moveArray[0].concat([ele])).concat(moveArray[1])).length == 9) {
@@ -184,6 +186,8 @@ function calculatePossibleMoves() {
             }
 
             emptyBoxes.forEach(function(ele) {
+
+              if(ele == 0){console.error(emptyBoxes)}
 
                 if (checkWin(moveArray[1].concat([ele]))) {
                     status = "LOST"
