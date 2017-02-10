@@ -210,3 +210,19 @@ function calculatePossibleMoves() {
     }
 
 }
+
+
+
+
+
+
+
+
+
+// possibleMovesWins.filter(function(arrEle){
+//   return game[0].every(function(ele,index){
+//     return arrEle[0][index] == ele;
+//   }) && game[1].every(function(ele,index){
+//     return arrEle[1][index] == ele;
+//   })
+// })
