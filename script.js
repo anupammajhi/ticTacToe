@@ -1,47 +1,49 @@
-$(function(){
-  $(".gamePlay").css("transition-duration","1s");
-  $(".chooseWeapon").css("transition-duration","1s");
-  $(".tictactoe").css("transition-duration","1s");
+$(function() {
+    $(".gamePlay").css("transition-duration", "1s");
+    $(".chooseWeapon").css("transition-duration", "1s");
+    $(".tictactoe").css("transition-duration", "1s");
 
-  $(".gamePlay").css("display","block");
+    $(".gamePlay").css("display", "block");
 });
 
 var gameplay = "";
 var playerChoice = "";
+var concluded = false;
 chance = Math.round((Math.random()));
 
-function displayChance(){
-  if(gameplay == "2 Player" && chance == 0){
-    text = "Player 1's Chance"
-  }
-  if(gameplay == "2 Player" && chance == 1){
-    text = "Player 2's Chance"
-  }
-  if(gameplay == "1 Player" && chance == 0){
-    text = "Computer's Chance"
-  }
-  if(gameplay == "1 Player" && chance == 1){
-    text = "Your Chance"
-  }
-  $(".chance").text(text);
-
+function displayChance() {
+    if (!concluded) {
+        if (gameplay == "2 Player" && chance == 0) {
+            text = "Player 1's Chance"
+        }
+        if (gameplay == "2 Player" && chance == 1) {
+            text = "Player 2's Chance"
+        }
+        if (gameplay == "1 Player" && chance == 0) {
+            text = "Computer's Chance"
+        }
+        if (gameplay == "1 Player" && chance == 1) {
+            text = "Your Chance"
+        }
+        $(".chance").text(text);
+    }
 }
 
 
-$(".singleplayer, .doubleplayer").click(function(){
-  gameplay = $(this).text();
-  $(".gamePlay").css("display","none");
-  $(".chooseWeapon").css("display","block");
-  if(gameplay == "2 Player"){
-    $(".weaponText span").text("Player 1")
-  }
+$(".singleplayer, .doubleplayer").click(function() {
+    gameplay = $(this).text();
+    $(".gamePlay").css("display", "none");
+    $(".chooseWeapon").css("display", "block");
+    if (gameplay == "2 Player") {
+        $(".weaponText span").text("Player 1")
+    }
 })
 
-$(".weaponX, .weaponO").click(function(){
-  playerChoice = $(this).text();
-  $(".chooseWeapon").css("display","none");
-  $(".tictactoe").css("display","block");
-  displayChance()
+$(".weaponX, .weaponO").click(function() {
+    playerChoice = $(this).text();
+    $(".chooseWeapon").css("display", "none");
+    $(".tictactoe").css("display", "block");
+    displayChance()
 })
 
 // Create array of size 9 with blanks
@@ -65,6 +67,8 @@ $(".col1, .col2, .col3").click(function() {
     clickedBoxIndex = $(".box").index($(this))
     if (arr[clickedBoxIndex] != "X" && arr[clickedBoxIndex] != "O") {
         arr.splice(clickedBoxIndex, 1, playerChoice)
+        chance == 0 ? chance = 1 : chance = 0;
+        displayChance();
         display();
     }
 });
@@ -113,7 +117,7 @@ function calculatePossibleMoves() {
     }
 
     //Start prediction of AI Move
-    if (possibleMovesPlayer.length > 0  && MovesLeft) {
+    if (possibleMovesPlayer.length > 0 && MovesLeft) {
         possibleMovesAI = []
         console.log("AI Moves");
         possibleMovesPlayer.forEach(function(moveArray) {
@@ -124,16 +128,15 @@ function calculatePossibleMoves() {
             });
 
             // console.log(emptyBoxes);
-            if(emptyBoxes.length == 1){
-              MovesLeft = false;
+            if (emptyBoxes.length == 1) {
+                MovesLeft = false;
             }
 
             emptyBoxes.forEach(function(ele) {
 
                 if (checkWin(moveArray[0].concat([ele]))) {
                     status = "WON"
-                }
-                 else if (((moveArray[0].concat([ele])).concat(moveArray[1])).length == 9) {
+                } else if (((moveArray[0].concat([ele])).concat(moveArray[1])).length == 9) {
                     status = "DRAW"
                     // console.log(((moveArray[0].concat([ele])).concat(moveArray[1])));
                 } else {
@@ -145,7 +148,7 @@ function calculatePossibleMoves() {
                 } else if (status == "LIVE") {
                     possibleMovesAI.push([moveArray[0].concat([ele]), moveArray[1], status])
                     // console.log(moveArray[0].concat([ele]), moveArray[1], status);
-                }else if (status == "DRAW") {
+                } else if (status == "DRAW") {
                     possibleMovesDraw.push([moveArray[0].concat([ele]), moveArray[1], status])
                 }
 
@@ -156,7 +159,7 @@ function calculatePossibleMoves() {
     } else {
         randomVal = Math.floor((Math.random() * 8));
         console.log("AI Moves");
-        console.log([randomVal],[], "LIVE");
+        console.log([randomVal], [], "LIVE");
         possibleMovesAI.push([
             [randomVal],
             [], "LIVE"
@@ -176,16 +179,15 @@ function calculatePossibleMoves() {
                 }
             });
 
-            if(emptyBoxes.length == 1){
-              MovesLeft = false;
+            if (emptyBoxes.length == 1) {
+                MovesLeft = false;
             }
 
             emptyBoxes.forEach(function(ele) {
 
                 if (checkWin(moveArray[1].concat([ele]))) {
                     status = "LOST"
-                }
-                else if (((moveArray[0].concat([ele])).concat(moveArray[1])).length == 9) {
+                } else if (((moveArray[0].concat([ele])).concat(moveArray[1])).length == 9) {
                     status = "DRAW"
                 } else {
                     status = "LIVE"
@@ -194,8 +196,7 @@ function calculatePossibleMoves() {
                 if (status == "LIVE") {
                     // console.log(moveArray[0], moveArray[1].concat([ele]), status)
                     possibleMovesPlayer.push([moveArray[0], moveArray[1].concat([ele]), status])
-                }
-                else if (status == "DRAW") {
+                } else if (status == "DRAW") {
                     possibleMovesDraw.push([moveArray[0], moveArray[1].concat([ele]), status])
                 }
                 statusArr.push(status)
@@ -204,9 +205,8 @@ function calculatePossibleMoves() {
 
         calculatePossibleMoves()
 
-    }
-    else{
-      console.log("Completed Prediction");
+    } else {
+        console.log("Completed Prediction");
     }
 
 }
