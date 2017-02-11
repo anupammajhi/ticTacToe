@@ -21,7 +21,7 @@ function displayChance() {
         }
         if (gameplay == "1 Player" && chance == 0) {
             text = "Computer's Chance"
-            if (game[0].length == 0 && game[1].length == 0 || game[0].length == 0 && game[1].length == 1 ) {
+            if (game[0].length == 0) {
                 calculatePossibleMoves();
             }
             computerPlay();
