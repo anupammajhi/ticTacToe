@@ -239,9 +239,17 @@ function calculatePossibleMoves() {
 
 
 function computerPlay() {
-    console.log("game :"+game);
-    if (game[0].length <= game[1].length) {
-        console.log("Computer Playing")
+    console.log("Computer Playing")
+    console.log("Start game :"+game);
+    setTimeout(function(){console.log("Sleeping")},1000)
+    if(game[0].length == 1 && game[1].length == 0)
+    {
+              arr.splice(game[0][0], 1, choice)
+              chance == 0 ? chance = 1 : chance = 0;
+              display()
+    }
+    else if ((game[0].length == 0 && game[1].length == 1) || game[0].length >= 1) {
+
         playIndex = game[0].length
 
         filterWin = possibleMovesWins.filter(function(arrEle) {
@@ -299,11 +307,7 @@ function computerPlay() {
 
         display();
     }
-    else{
-              arr.splice(game[0][0], 1, choice)
-              chance == 0 ? chance = 1 : chance = 0;
-              display()
-    }
+    console.log("End game :"+game);
 }
 
 
