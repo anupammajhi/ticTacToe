@@ -21,6 +21,10 @@ function displayChance() {
         }
         if (gameplay == "1 Player" && chance == 0) {
             text = "Computer's Chance"
+            if (game[0].length == 0 && game[1].length == 0 || game[0].length == 0 && game[1].length == 1 ) {
+                calculatePossibleMoves();
+            }
+            computerPlay();
         }
         if (gameplay == "1 Player" && chance == 1) {
             text = "Your Chance"
@@ -48,6 +52,10 @@ $(".weaponX, .weaponO").click(function() {
 
 // Create array of size 9 with blanks
 arr = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+game = [
+    [],
+    []
+]
 
 playerChoice == "O" ? choice = "X" : choice = "O"
 //Display X or O in the tic tac toe squares
@@ -60,16 +68,30 @@ function display() {
         }
         box += 1;
     });
+    displayChance();
 }
+
+function display2() {
+    box = 0
+    arr.forEach(function(ele) {
+        if (ele == "X" || ele == "O") {
+            boxID = "#box" + box
+            $(boxID).text(ele);
+        }
+        box += 1;
+    });
+}
+
 
 // On click on box
 $(".col1, .col2, .col3").click(function() {
     clickedBoxIndex = $(".box").index($(this))
     if (arr[clickedBoxIndex] != "X" && arr[clickedBoxIndex] != "O") {
         arr.splice(clickedBoxIndex, 1, playerChoice)
+        game[1].push(clickedBoxIndex)
         chance == 0 ? chance = 1 : chance = 0;
-        displayChance();
         display();
+        console.log(game)
     }
 });
 
@@ -116,6 +138,7 @@ function calculatePossibleMoves() {
         ])
     }
 
+    console.log(game)
     //Start prediction of AI Move
     if (possibleMovesPlayer.length > 0 && MovesLeft) {
         possibleMovesAI = []
@@ -164,6 +187,9 @@ function calculatePossibleMoves() {
             [randomVal],
             [], "LIVE"
         ])
+
+        game[0].push(randomVal);
+        display2();
     }
 
 
@@ -212,7 +238,73 @@ function calculatePossibleMoves() {
 }
 
 
+function computerPlay() {
+    console.log("game :"+game);
+    if (game[0].length <= game[1].length) {
+        console.log("Computer Playing")
+        playIndex = game[0].length
 
+        filterWin = possibleMovesWins.filter(function(arrEle) {
+            return game[0].every(function(ele, index) {
+                return arrEle[0][index] == ele;
+            }) && game[1].every(function(ele, index) {
+                return arrEle[1][index] == ele;
+            })
+        })
+
+        if (filterWin.length > 0) {
+            //Found data in Win Matrix, continue further
+        } else {
+            //No data in Win Matrix, hence try Draw Matrix
+            filterWin = possibleMovesDraw.filter(function(arrEle) {
+                return game[0].every(function(ele, index) {
+                    return arrEle[0][index] == ele;
+                }) && game[1].every(function(ele, index) {
+                    return arrEle[1][index] == ele;
+                })
+            })
+        }
+
+        filterPlay = filterWin.sort(function(a, b) {
+            //Sort by minimum number of moves by computer
+            return a[0].length - b[0].length
+        })
+
+        filterPlayBestMoves = filterPlay.filter(function(ele) {
+            //filter by minimum number of moves only
+            return ele[0].length == filterPlay[0][0].length
+        })
+
+        filterPlayBestMovesStrategic = filterPlayBestMoves.filter(function(ele) {
+            //Filter even digit places as they are best strategic moves with double threatening etc
+            return ele[0][playIndex] % 2 == 0
+        })
+
+        if (filterPlayBestMovesStrategic.length != 0) {
+            filterPlayBestMoves = filterPlayBestMovesStrategic;
+        }
+
+        //Choose one of the move matrix randomly
+
+        chooseMatrixIndex = Math.round((Math.random()) * (filterPlayBestMoves.length - 1))
+
+        console.log(filterPlayBestMoves)
+
+        choosePlace = filterPlayBestMoves[chooseMatrixIndex][0][playIndex]
+        console.log(choosePlace)
+
+        arr.splice(choosePlace, 1, choice)
+        game[0].push(choosePlace)
+        chance == 0 ? chance = 1 : chance = 0;
+
+        display();
+    }
+    else{
+              arr.splice(game[0][0], 1, choice)
+              chance == 0 ? chance = 1 : chance = 0;
+              display()
+    }
+}
 
 
 
