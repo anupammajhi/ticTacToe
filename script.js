@@ -240,7 +240,7 @@ function calculatePossibleMoves() {
 
 function computerPlay() {
     console.log("Computer Playing")
-    console.log("Start game :"+game);
+    console.log("Start game :"+ game[0] + " -- " game[1]);
     setTimeout(function(){console.log("Sleeping")},1000)
     if(game[0].length == 1 && game[1].length == 0)
     {
@@ -307,7 +307,7 @@ function computerPlay() {
 
         display();
     }
-    console.log("End game :"+game);
+    console.log("End game :"+ game[0] + " -- " game[1]);
 }
 
 
