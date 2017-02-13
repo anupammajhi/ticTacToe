@@ -189,7 +189,9 @@ function calculatePossibleMoves() {
                 })
             });
         } else {
-            randomVal = Math.floor((Math.random() * 8));
+            //Choose Only Corners or Center i.e 0, 2, center(4) , 6, 8
+            randomVal = Math.floor((Math.random() * 4));
+            randomVal = randomVal * 2
             console.log("Computer plays first - Hence Random Value");
             console.log([randomVal], [], "LIVE");
             possibleMovesAI.push([
@@ -251,6 +253,15 @@ function calculatePossibleMoves() {
 
 
 function computerPlay() {
+
+
+      // Rule 1: If I have a winning move, take it.
+      // Rule 2: If the opponent has a winning move, block it.
+      // Rule 3: If I can create a fork (two winning ways) after this move, do it.
+      // Rule 4: Do not let the opponent creating a fork after my move. (Opponent may block your winning move and create a fork.)
+      // Rule 5: Place in the position such as I may win in the most number of possible ways.
+
+
     console.log("Computer Playing /////////////////////////////////////")
     console.log("Start game :" + game[0] + " -- " + game[1]);
     if (game[0].length == 1 && game[1].length == 0) {
@@ -261,6 +272,7 @@ function computerPlay() {
 
         playIndex = game[0].length
 
+        //RULE 2 IN PLAY =================================================================================================
         console.log("Testing Bad Moves ----");
 
         filterLost = possibleMovesLost.filter(function(ele) {
@@ -284,6 +296,8 @@ function computerPlay() {
 
             choosePlace = choosePlace[0]
         } else {
+
+            //RULE 5 IN PLAY ===============================================================================================
             console.log("No Bad Move Found ---");
             filterWin = possibleMovesWins.filter(function(arrEle) {
                 return game[0].every(function(ele, index) {
