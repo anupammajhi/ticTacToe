@@ -265,6 +265,7 @@ function computerPlay() {
     console.log("Computer Playing /////////////////////////////////////")
     console.log("Start game :" + game[0] + " -- " + game[1]);
     if (game[0].length == 1 && game[1].length == 0) {
+        //If Move has been guessed during Moves Calculation & Computer plays first
         arr.splice(game[0][0], 1, choice)
         chance == 0 ? chance = 1 : chance = 0;
         display()
@@ -330,6 +331,7 @@ function computerPlay() {
                 return ele[0].length == filterPlay[0][0].length
             })
 
+            //RULE 1 IN PLAY ===============================================================================================
             filterPlayBestMovesStrategic = filterPlayBestMoves.filter(function(ele) {
                 //Filter even digit places as they are best strategic moves with double threatening etc
                 return ele[0][playIndex] % 2 == 0
