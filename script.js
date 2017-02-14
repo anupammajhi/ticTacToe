@@ -255,11 +255,11 @@ function calculatePossibleMoves() {
 function computerPlay() {
 
 
-      // [x] Rule 1: If I have a winning move, take it.
-      // [X] Rule 2: If the opponent has a winning move, block it.
-      // [ ] Rule 3: If I can create a fork (two winning ways) after this move, do it.
-      // [ ] Rule 4: Do not let the opponent creating a fork after my move. (Opponent may block your winning move and create a fork.)
-      // [X] Rule 5: Place in the position such as I may win in the most number of possible ways.
+    // [x] Rule 1: If I have a winning move, take it.
+    // [X] Rule 2: If the opponent has a winning move, block it.
+    // [ ] Rule 3: If I can create a fork (two winning ways) after this move, do it.
+    // [ ] Rule 4: Do not let the opponent creating a fork after my move. (Opponent may block your winning move and create a fork.)
+    // [X] Rule 5: Place in the position such as I may win in the most number of possible ways.
 
 
     console.log("Computer Playing /////////////////////////////////////")
@@ -297,6 +297,18 @@ function computerPlay() {
 
             choosePlace = choosePlace[0]
         } else {
+
+            //Test If Computer Can fork win moves
+
+            possibleMovesWins.filter(function(arr1) {
+                return possibleMovesWins.filter(function(arr2) {
+                    return arr1[0].slice(0, -1).every(function(arrx, index) {
+                        return arr2[0][index] == arrx
+                    }) && arr1[1].slice(0, -1).every(function(arrx, index) {
+                        return arr2[2][index] == arrx
+                    })
+                })
+            })
 
             //RULE 5 IN PLAY ===============================================================================================
             console.log("No Bad Move Found ---");
